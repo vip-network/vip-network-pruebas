@@ -1,0 +1,51 @@
+{{!-- slider rodoados --}}
+<div class="ht__bradcaump__area" style="background: rgba(0, 0, 0, 0) url(/img/bg/4.jpg) no-repeat scroll center center / cover ;">
+    <div class="ht__bradcaump__wrap"></div>
+</div>
+{{!-- fin slider rodados --}}
+
+<div class="container">
+    <div class="row">
+        <section class="htc__product__grid bg__white ptb--100">
+            <div class="container">
+                <div class="row">
+                    <div class="htc__product__rightidebar">
+                        <!-- listado de productos -->
+                        <div class="row">
+                            <div class="shop__grid__view__wrap">
+                                <!-- vista producto simple -->
+                                <div role="tabpanel" id="grid-view" class="single-grid-view tab-pane fade in active clearfix">
+                                    {{#each list_Roda.recordset}}                                    
+                                    <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                                        <div class="category">
+                                            <div class="ht__cat__thumb">
+                                                <a href="/rodados/detalle_rodado/{{id}}">
+                                                    <img src="img/product/1.jpg" alt="product images">
+                                                </a>
+                                            </div>
+                                            <div class="fr__hover__info">
+                                                <ul class="product__action">
+                                                    <li><a href="/add/{{id}}"><i class="icon-handbag icons"></i></a></li>
+                                                </ul>
+                                            </div>
+                                            <div class="fr__product__inner">
+                                                <h4><a href="product-details.html">{{nombre}}</a></h4>
+                                                <ul class="fr__pro__prize">
+                                                    {{!-- <li class="old__prize">$30.3</li> --}}
+                                                    <li>${{precio}}</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>                                    
+                                    {{/each}}
+                                </div>
+                                <!-- fin vista producto simple -->
+                            </div>
+                        </div>
+                        <!-- fin listado de productos -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

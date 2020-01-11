@@ -1,0 +1,95 @@
+<div class="cart-main-area ptb--100 bg__white">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <form method="POST" action="/enviar" accept-charset=utf-8>
+
+                    <div class="table-content table-responsive">
+                        <table id="productos" name="productos">
+                            <thead>
+                                <tr>
+                                    <th class="product-thumbnail">ID</th>
+                                    <th class="product-name">Nombre del Producto</th>
+                                    <th class="product-price">Precio Unitario</th>
+                                    <th class="product-quantity">Cantidad</th>
+                                    <th class="product-subtotal">Total</th>
+                                    <th class="product-remove">Eliminar</th>
+                                </tr>
+                            </thead>   
+                            <tbody>
+                                {{#each session.cart.items}}
+                                <tr>                                        
+                                    <td class="product-thumbnail">
+                                        <a href="#">{{ item.id }}</a>
+                                    </td>
+                                    <td class="product-name">
+                                        <a href="#">{{ this.item.nombre }}</a>
+                                    </td>
+                                    <td class="product-price">
+                                        <span class="amount">${{ this.item.precio }} CLP</span>
+                                    </td>
+                                    <td class="product-quantity">
+                                        {{!-- <input type="number" value="{{ this.quantity }}"/>  --}}
+                                        <a href="#"> {{ this.quantity }} </a>                                        
+                                    </td>
+                                    <td class="product-subtotal">
+                                        ${{ this.precio }} CLP
+                                    </td>
+                                    <td class="product-remove">
+                                        <a href="/remove/{{this.item.id}}"> 
+                                            <i class="icon-trash icons"></i>
+                                        </a>
+                                    </td>                                        
+                                </tr>
+                                {{/each}}
+                            </tbody>                            
+                        </table>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="buttons-cart--inner">
+                                <div class="buttons-cart checkout--btn">
+                                    <a href="/carrito_productos">Refrescar</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12 col-xs-12">
+                            
+                        </div>
+                        <div class="col-md-6 col-sm-12 col-xs-12 smt-40 xmt-40">
+                            <div class="htc__cart__total">
+                                <h6>Total Compra</h6>
+                                <div class="cart__desk__list">
+                                    <ul class="cart__desc">
+                                        <li>Total</li>
+                                        <li>Iva.</li>
+                                        {{!-- <li>Envío</li> --}}
+                                    </ul>
+                                    <ul class="cart__price">
+                                        <li>${{ session.cart.totalPrice }} CLP</li>
+                                        <li name="iva">Incluido</li>
+                                        {{!-- <li name="envio">$5000 CLP</li> --}}
+                                    </ul>
+                                </div>
+                                <div class="cart__total">
+                                    <span>Total Orden</span>
+                                    <span>${{ session.cart.totalPrice }}CLP</span>
+                                </div>
+                                <ul class="payment__btn">
+                                    <input type="hidden" name="_csrf" value="{{csrfToken}}">
+
+                                    <button type="submit" class="btn btn-primary">Cotizar</button>
+                                    <li><a href="#">continuar Comprando</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

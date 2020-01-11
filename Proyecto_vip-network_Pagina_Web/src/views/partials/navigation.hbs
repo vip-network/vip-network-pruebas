@@ -1,0 +1,134 @@
+<header id="htc__header" class="htc__header__area header--one">
+  <div id="sticky-header-with-topbar" class="mainmenu__wrap sticky__header">
+    <div class="container">
+      <div class="row" style="margin-left: -100px; margin-right: -100px">
+        <div class="menumenu__container clearfix">
+          <div class="col-lg-2 col-md-2 col-sm-5 col-xs-5">
+            <div class="logo">
+              <a href="/">
+                <img src="/img/logo/logo2.jpeg" alt="logo images" width="100" height="80"/>
+              </a>
+            </div>
+          </div>
+          <div class="col-md-8 col-lg-8 col-sm-5 col-xs-4">
+            <nav class="main__menu__nav hidden-xs hidden-sm">
+              <ul class="main__menu">
+                <li class="drop">
+                  <a href="/">Inicio</a>
+                </li>
+                <li class="drop">
+                  <a href="/bicicletas">Bicicletas</a>
+                </li>
+                <li class="drop">
+                  <a href="#">Entretenimiento</a>
+                  <ul class="dropdown">
+                    <li><a href="/outdoor">Juegos OutDoor</a></li>
+                  </ul>
+                </li>
+                <li class="drop">
+                  <a href="#">Infantil </a>
+                  <ul class="dropdown">
+                    <li><a href="/cunas">Cunas</a></li>
+                    <li><a href="/rodados">Rodados</a></li>
+                  </ul>
+                </li>
+                <li class="drop">
+                  <a href="/limpieza">Limpieza</a>
+                </li>
+                <li class="drop">
+                  <a href="#">Automotriz</a>
+                  <ul class="dropdown">
+                    <li><a href="/seguridad_automotriz">Seguridad</a></li>
+                    <li><a href="/accesorios_automotriz">Accesorios</a></li>
+                  </ul>
+                </li>
+                <li class="drop">
+                  <a href="/vigilancia">Vigilancia</a>
+                </li>
+                <li class="drop">
+                  <a href="#">Maquinas </a>
+                  <ul class="dropdown">
+                    <li><a href="/maquinas">Pelucheras/capsuleras</a></li>
+                    <li><a href="/peluches">Peluches Para Maquinas</a></li>
+                    <li><a href="/capsulas">Capsulas Para Maquinas</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </nav>
+
+            <div class="mobile-menu clearfix visible-xs visible-sm">
+              <nav id="mobile_dropdown">
+                <ul>
+                  <li><a href="/">Inicio</a></li>
+                  <li><a href="/bicicletas">Bicicletas</a></li>
+                  <li><a href="#">Entretenimiento</a>
+                    <ul class="mega__item" style="height: auto;">
+                      <li><a href="/outdoor">Juegos OutDoor</a></li>
+                    </ul>
+                  </li> 
+                  <li><a href="#">Infantil</a>
+                    <ul class="mega__item" style="height: auto;">
+                      <li><a href="/cunas">Cunas</a></li> 
+                      <li><a href="/rodados">Rodados</a></li>
+                    </ul>
+                  </li> 
+                  <li><a href="/limpieza">Limpieza</a></li>
+                  <li><a href="#">Automotriz</a>
+                    <ul class="mega__item" style="height: auto;">
+                      <li><a href="/seguridad_automotriz">Seguridad</a></li> 
+                      <li><a href="/accesorios_automotriz">Accesorios</a></li>
+                    </ul>
+                  </li> 
+                  <li><a href="/vigilancia">Vigilancia</a></li>
+                  <li><a href="#">Maquinas</a>
+                      <ul class="mega__item" style="height: auto;">
+                          <li><a href="/pelucheras">Pelucheras</a></li>
+                          <li><a href="/peluches">Peluches de Maquinas</a></li>
+                          <li><a href="/capsuleras">Capsuleras</a></li>
+                      </ul>
+                  </li>
+                  <li><a href="/contactos">Contactos</a></li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+
+          <div class="col-md-2 col-lg-2 col-sm-1 col-xs-1">
+            <div class="header__right">
+              
+              <div class="header__account dropdown">
+                <a data-toggle="dropdown">
+                  <i class="icon-user icons"></i>
+                </a>  
+                {{#if login}}
+                <div class="dropdown-menu" >
+                  <li><a href="/profile"> Perfil </a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a href="/logout"> Cerrar Sesión </a></li>
+                </div>
+                {{else}}
+                <div class="dropdown-menu" >                  
+                  <li><a href="/signin"> Ingresar </a></li>
+                  <li><a href="/signup"> Registrar </a></li>
+                </div>
+                {{/if}}
+              </div>
+              
+              <div class="htc__shopping__cart" id="carrito">
+                <a class="cart__menu" href="#"><i class="icon-handbag icons"></i>
+                  {{#if session.cart.totalItems }}
+                    <a href="/carrito_productos"><span class="htc__qua">{{session.cart.totalItems}}</span></a>  
+                  {{/if}}
+                </a> 
+
+              </div>
+
+            </div>
+          </div>
+          
+        </div>
+      </div>
+      <div class="mobile-menu-area"></div>
+    </div>
+  </div>
+</header>
