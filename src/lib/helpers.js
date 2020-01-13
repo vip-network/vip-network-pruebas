@@ -1,16 +1,16 @@
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 
 const helpers = {};
 
 //encripta la pass
 helpers.encryptPassword = async (pass) => {
-    // console.log(pass)
+    console.log(pass)
     const salt = await bcrypt.genSalt(10);
     const hast = await bcrypt.hash(pass, salt)
     return hast;
 };
 
-//compara en el logeo la pass encriptada de la base con la ingresada(valida la clave)
+//compara en el logeo la pass encriptada de la base con la ingresada
 
 helpers.matchPassword = async (pass, savedPassword) => {
     
