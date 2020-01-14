@@ -1,0 +1,191 @@
+<div class="container">
+    <div class="row">
+        <section class="htc__product__details bg__white ptb--100">
+            <!-- Start Product Details Top -->
+            <div class="htc__product__details__top">
+                <div class="container" id="lista-productos">
+                    <div class="row" id="marcador">
+                        <form action="" method="POST"> 
+                            <div class="col-md-5 col-lg-5 col-sm-12 col-xs-12">
+                                <div class="htc__product__details__tab__content">
+                                    <!-- imagenes grandes -->
+                                    <div class="product__big__images">
+                                        <div class="portfolio-full-image tab-content">
+                                            <div role="tabpanel" class="tab-pane fade in active" id="img-tab-1">
+                                                <img src="/img/fotos_bici/{{idProducto.id}}/bici_1.jpg" alt="full-image">
+                                            </div>
+                                            <div role="tabpanel" class="tab-pane fade" id="img-tab-2">
+                                                <img src="/img/fotos_bici/{{idProducto.id}}/bici_2.jpg" alt="full-image">
+                                            </div>
+                                            <div role="tabpanel" class="tab-pane fade" id="img-tab-3">
+                                                <img src="/img/fotos_bici/{{idProducto.id}}/bici_3.jpg" alt="full-image">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- fin imagenes grandes -->
+                                    <!-- imagenes pequeñas -->
+                                    <ul class="product__small__images" role="tablist">
+                                        <li role="presentation" class="pot-small-img active">
+                                            <a href="#img-tab-1" role="tab" data-toggle="tab">
+                                                <img src="/img/fotos_bici/{{idProducto.id}}/bici_1.jpg" alt="small-image">
+                                            </a>
+                                        </li>
+                                        <li role="presentation" class="pot-small-img">
+                                            <a href="#img-tab-2" role="tab" data-toggle="tab">
+                                                <img src="/img/fotos_bici/{{idProducto.id}}/bici_2.jpg" alt="small-image">
+                                            </a>
+                                        </li>
+                                        <li role="presentation" class="pot-small-img">
+                                            <a href="#img-tab-3" role="tab" data-toggle="tab">
+                                                <img src="/img/fotos_bici/{{idProducto.id}}/bici_3.jpg" alt="small-image">
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <!-- fin imagenes pequeñas -->
+                                </div>
+                            </div>
+                            <div class="col-md-7 col-lg-7 col-sm-12 col-xs-12 smt-40 xmt-40">
+                                <div class="ht__product__dtl">
+                                    <h2>{{idProducto.nombre}}</h2>
+                                    <h6>Modelo: <span>2020</span></h6>
+                                    <ul class="pro__prize">
+                                        {{!-- <li class="old__prize">$82.5</li> --}}
+                                        <li>$ {{idProducto.precio}} CLP</li>
+                                    </ul>
+                                    <div class="ht__pro__desc"></div>
+                                        <div class="sin__desc">                                   
+                                            <p><span>Descripcion del Producto: </span>{{idProducto.descripcion}}</p>                             
+                                        </div>
+                                    </div> 
+                                    <div class="ht__pro__desc">
+                                        <div class="sin__desc">                                   
+                                            <p><span>Estado:</span>
+                                            {{#if idProducto.stock}} 
+                                                Disponible
+                                            {{else}}
+                                                Agotado
+                                            {{/if}}
+                                            </p>                                    
+                                        </div>
+                                        <div class="sin__desc">
+                                            <p><span>Stock:</span> {{idProducto.stock}} Unidades Disponibles</p>
+                                        </div>
+                                    </div>
+                                    <br>                     
+                                    <div class="fr__list__btn p-4">
+                                        <a class="fr__btn" href="/add/{{idProducto.id}}"> <i class="fa fa-shopping-cart" aria-hidden="true"></i> Agregar al Carrito</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+            <!-- End Product Details Top -->
+        </section>
+        <!-- End Product Details Area -->
+
+        <!-- Descripcion del producto-->
+        <section class="htc__produc__decription bg__white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <!-- descripcion general del producto -->
+                        <ul class="pro__details__tab" role="tablist">                    
+                            <li role="presentation" class="especificaciones active">
+                                <a href="#especificaciones" role="tab"data-toggle="tab">Especificaciones</a>
+                            </li>
+                        </ul>
+                        <!-- fin descripcion general del producto -->
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="ht__pro__details__content">
+                            <!-- Contenido especificaciones -->
+                            <div role="tabpanel" id="especificaciones" class="pro__single__content tab-pane fade in active">
+                                <div class="pro__tab__content__inner">                            
+                                    <table class="table table-responsive-sm table-bordered">
+                                        <tbody>                                    
+                                            <tr>
+                                                <th>Marca</th>
+                                                <td >{{idDetalleProducto.marca}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Modelo</th>
+                                                <td >{{idDetalleProducto.modelo}}</td>
+                                            </tr> 
+                                            <tr>
+                                                <th>Aro</th>
+                                                <td >{{idDetalleProducto.aro}}</td>
+                                            </tr> 
+                                            <tr>
+                                                <th>Genero</th>
+                                                <td >{{idDetalleProducto.genero}}</td>
+                                            </tr> 
+                                            <tr>
+                                                <th>Tipo de Freno</th>
+                                                <td >{{idDetalleProducto.tipo_freno}}</td>
+                                            </tr> 
+                                            <tr>
+                                                <th>Material del Marco</th>
+                                                <td >{{idDetalleProducto.material_marco}}</td>
+                                            </tr> 
+                                            <tr>
+                                                <th>Talla Marco</th>
+                                                <td >{{idDetalleProducto.talla_marco}}</td>
+                                            </tr>        
+                                            <tr>
+                                                <th>Numero de Cambios</th>
+                                                <td >{{idDetalleProducto.cantidad_cambios}}</td>
+                                            </tr>    
+                                            <tr>
+                                                <th>Suspension </th>
+                                                <td >{{idDetalleProducto.suspension}}</td>
+                                            </tr>    
+                                            <tr>
+                                                <th>Horquilla</th>
+                                                <td >{{idDetalleProducto.horquilla}}</td>
+                                            </tr>     
+                                            <tr>
+                                                <th>Manubrio</th>
+                                                <td >{{idDetalleProducto.manubrio}}</td>
+                                            </tr>       
+                                            <tr>
+                                                <th>Manillas</th>
+                                                <td >{{idDetalleProducto.manillas}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Pedales</th>
+                                                <td >{{idDetalleProducto.pedal}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Sillin</th>
+                                                <td >{{idDetalleProducto.sillin}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Neumaticos</th>
+                                                <td >{{idDetalleProducto.neumatico}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Rayos</th>
+                                                <td >{{idDetalleProducto.rayos}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Peso</th>
+                                                <td >{{idDetalleProducto.peso}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>                                                    
+                                </div>
+                            </div>
+                            <!-- fin Contenido especificaciones -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Product Description -->
+    </div>
+</div>

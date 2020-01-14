@@ -4,88 +4,69 @@ const LocalStrategy = require('passport-local').Strategy;
 const db = require('../database');
 const helpers = require('../lib/helpers');
 
+// logeo del usuario
 passport.use('local.signin', new LocalStrategy({
-    usernameField: 'correo',
+    usernameField: 'email',
     passwordField: 'pass',
     passReqToCallback: true
-}, async (req, correo, pass, done) => {
-    const rows = await db.query("SELECT * FROM usuarios WHERE correo = '"+ correo +"' ")
-    const rowsf = rows.recordsets[0]//.recordsets posicionsa dentro de recorsets -- .recordsets[0] posisiona dentro del recosrsets/recorset/objeto 0
+}, async (req, email, pass, done) => {
+    const rows = await db.query("SELECT * FROM usuarios WHERE email = '"+ email +"' ")
+    const rowsf = rows.recordsets[0]
 
     //validacion login
     if (rowsf.length > 0) {//valida el correo
         const user = rowsf[0];// posisiona en el objeto 0 dentro del arreglo
-
         const validPass = await helpers.matchPassword(pass, user.pass)
-        if (validPass) {//valdia la pass
+        if (validPass) {//valdia la contraseña
             done(null, user, req.flash('success','Bienvenido ' + user.nombre));
         }else{
             done(null, false, req.flash('message', 'clave invalida '));
         }
-
     }else{
         return done(null, false, req.flash('message','el correo Ingresado no existe'))
     }
 
 }));
 
+// registro de usuario
 passport.use('local.signup', new LocalStrategy({
-    usernameField: 'nombre',
+    usernameField: 'email',
     passwordField: 'pass',
     passReqToCallback: true,
-    session: false
-}, async (req, nombre, pass, done) =>{
-    const {correo, tipo_usuario} = req.body;
+}, async (req, email, pass, done) =>{ 
+    const {nombre,apellido,direccion,telefono} = req.body;
     const newUser = {
         nombre,
+        apellido,
+        email,
+        direccion,
         pass,
-        correo,
-        tipo_usuario
-    };
-    newUser.pass = await helpers.encryptPassword(pass);
-    const result = await db.query("INSERT INTO usuarios (nombre,pass,correo,tipo_usuario) values('" + newUser.nombre + "','" + newUser.pass + "','" + newUser.correo + "','" + newUser.tipo_usuario + "')")    
+        telefono
+    };           
+    const emailBase =  await db.query("SELECT email FROM usuarios WHERE email = '"+email+"' ");
+    const emailBasef = emailBase.recordset
 
-    const idResult = await db.query("SELECT id FROM usuarios WHERE nombre = '" + newUser.nombre + "' and pass = '" + newUser.pass + "' and correo = '" + newUser.correo + "' and tipo_usuario ='" + newUser.tipo_usuario + "' ")
-    // console.log(idResult.recordset[0])
-    newUser.id = (idResult.recordset[0]).id
-    // console.log(newUser)
-    return done(null, newUser);
+    //valida si el correo exixte en la base 
+    if (emailBasef.length > 0) {
+        return done(null, false, req.flash('message','Correo ya existente, ingrese uno valido'));
+        
+    }else{
+        newUser.pass = await helpers.encryptPassword(pass);
+        const result = await db.query("INSERT INTO usuarios (nombre,apellido,email,direccion,pass,telefono) values('" + newUser.nombre + "','" + newUser.apellido + "','" + newUser.email + "','" + newUser.direccion + "','" + newUser.pass + "','" + newUser.telefono + "')")     
+
+        // solo sirve para recuperar el id del registro ingresado
+        const idResult = await db.query("SELECT id FROM usuarios WHERE nombre = '" + newUser.nombre + "' and apellido = '" + newUser.apellido + "' and email = '" + newUser.email + "' and direccion ='" + newUser.direccion + "' and  pass ='" + newUser.pass + "', telefono ='" + newUser.telefono + "'") 
+        newUser.id = (idResult.recordset[0]).id 
+        return done(null, newUser);
+    }; 
 }));
 
 passport.serializeUser((user, done) => {
-    done(null, user.id);
+    done(null, user.id)
 });
-  
-passport.deserializeUser(async (id, done) => {
-    const rows = await db.query("SELECT * FROM usuarios WHERE id = '"+ id +"'")
-    // console.log(rows.recordset[0])
+
+passport.deserializeUser(async (id, done) =>{
+    const rows = await db.query("SELECT * FROM usuarios WHERE id= '"+ id +"' ");
     done(null, rows.recordset[0])
+
 });
-
-
-
-// validacion del correo junto al pass (aplicar en modelo actual)
-// router.get("/checkUser", (req, res, next) => {
-//     if(!req.query) {
-//         res.status(400).json({
-//             error: 'Informacion no recibida'
-//         });
-//     }
-//     const correo = req.query.correo;
-//     const pass = req.query.pass;
-//     model.find({ correo: correo, pass: pass }, (err, user) => {
-//         if(err) { // un error indica que hubo problemas con la consulta
-//             res.status(500).json({
-//                 error: 'Eror de Servidor'
-//             });
-//         }
-//         if(!user) { // Si el usuario no existe
-//             res.status(400).json({
-//                 message: 'Usuario no existente'
-//             });
-//         }
-//         console.log("USUARIO ENCONTRADO: ", user);
-//         // AQUI PUEDES LLAMAR A TU SIGUIENTE MIDDLEWARE O DEVOLVER EL RESULTADO
-//         next(); //<= SI VAS A LLAMAR AL SIGUIENTE MIDDLEWARE
-//     });
-// });

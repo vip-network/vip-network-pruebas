@@ -3,10 +3,13 @@ const sql = require('mssql');
 const database = {
     user: 'sa',
     password: 'A44afb0b6808d662',
-    server: '192.168.11.5',
+    // server: '192.168.1.146',
+    // server: '186.67.71.37',
+    server: '192.168.11.6',
     port: 1433, 
-    database: 'vip-network' 
+    database: 'Pagina_Web' 
 };
+
 
 //en caso de error
 var connection = new sql.ConnectionPool(database, function(err, connection){
