@@ -1,12 +1,12 @@
-const bcrypt = require('bcrypt')
+const bcryptjs = require('bcryptjs')
 
 const helpers = {};
 
 //encripta la pass
 helpers.encryptPassword = async (pass) => {
     // console.log(pass)
-    const salt = await bcrypt.genSalt(10);
-    const hast = await bcrypt.hash(pass, salt)
+    const salt = await bcryptjs.genSalt(10);
+    const hast = await bcryptjs.hash(pass, salt)
     return hast;
 };
 
@@ -15,7 +15,7 @@ helpers.encryptPassword = async (pass) => {
 helpers.matchPassword = async (pass, savedPassword) => {
     
     try {
-        return await bcrypt.compare(pass, savedPassword);
+        return await bcryptjs.compare(pass, savedPassword);
     } catch (e) {
         console.log(e);
     }
